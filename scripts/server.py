@@ -98,7 +98,7 @@ def rest_talk():
 
 @app.route('/chat', methods=["POST"])
 def rest_chat():
-    """ Reset chat """
+    """  chat with Gemini by audio """
     txt = vosk.request(request.data)
     result = gemini.request(txt)
     response = voice_v.synthesize(result)
