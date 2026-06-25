@@ -17,6 +17,7 @@ limitations under the License.
 import binascii
 import json
 import traceback
+from flask import jsonify
 import vosk
 
 class VoskRecognizer:
@@ -46,7 +47,7 @@ class VoskRecognizer:
             if data == data_ :
                 return recog_txt
             else:
-                return {'result': recog_txt }
+                return jsonify({'result': recog_txt })
         except Exception as e:
             traceback.print_exc()
             return False
