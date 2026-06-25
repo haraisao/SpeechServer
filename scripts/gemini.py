@@ -233,3 +233,4 @@ class Gemini(object):
             return
         response_text = self.get_response_text(result)
         print(response_text[1])
+        return response_text[1]

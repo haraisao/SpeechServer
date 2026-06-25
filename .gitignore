@@ -1,5 +1,6 @@
 __pycache__
 downloads
 *.pyc
-voicevox_core
-vosk-model*
+voicevox_core/
+vosk-model*/
+
