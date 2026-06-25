@@ -34,11 +34,19 @@ class VoskRecognizer:
     def request(self, data):
         """ Request from client """
         try:
-            bdata = binascii.a2b_base64(data)
+            param=json.loads(data)
+            data_ = param['data']
+        except:
+            data_=data
+        try:
+            bdata = binascii.a2b_base64(data_)
             res=self.execute(bdata)
             response=json.loads(res)
             recog_txt=response['text'].replace(' ', '')
-            return recog_txt
+            if data == data_ :
+                return recog_txt
+            else:
+                return {'result': recog_txt }
         except Exception as e:
             traceback.print_exc()
             return False
