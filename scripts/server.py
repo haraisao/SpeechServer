@@ -27,6 +27,7 @@ import os
 import yaml
 
 
+PJ_TOP = os.path.abspath(os.path.dirname(__file__) + "/..")
 def load_yaml(fname):
     config=None
     try:
@@ -36,7 +37,7 @@ def load_yaml(fname):
         pass
     return config
 
-DOCUMENT_ROOT=os.environ.get('DOCUMENT_ROOT', os.getcwd()+'/html/')
+DOCUMENT_ROOT=os.environ.get('DOCUMENT_ROOT', PJ_TOP+'/html/')
 TEMPLATE_ROOT=DOCUMENT_ROOT
 #print(DOCUMENT_ROOT, TEMPLATE_ROOT)
 
@@ -49,11 +50,12 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.secret_key='SpeechServer_for_AI_Stackchan'
 app.permanent_session_lifetime = datetime.timedelta(hours=16)
 
-KEY_FILE=os.environ.get('KEY_FILE', 'conf/application_key.yaml' )
+KEY_FILE=os.environ.get('KEY_FILE', PJ_TOP+'/conf/application_key.yaml' )
 config=load_yaml(KEY_FILE)
 
-voice_v = Voicevox()
-vosk = VoskRecognizer()
+
+voice_v = Voicevox(core_dir=os.path.join(PJ_TOP, "lib/voicevox_core"))
+vosk = VoskRecognizer(model_path=os.path.join(PJ_TOP, "lib/vosk-model-ja-0.22"))
 
 key=config['gemini_key']
 gemini=Gemini(key)

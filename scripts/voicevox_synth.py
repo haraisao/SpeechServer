@@ -69,10 +69,13 @@ def get_tts_sentence(txt):
 #
 #
 class Voicevox:
-    def __init__(self, name="voicevox"):
+    def __init__(self, name="voicevox", core_dir=None):
         #
         # Parameters
-        self.core_dir = VOICEVOX_CORE
+        if core_dir is None:
+            self.core_dir = VOICEVOX_CORE
+        else:
+            self.core_dir = core_dir
         
         self.model_file = "0.vvm"
         self.synthesizer = setup_voicevox(self.core_dir, self.model_file)

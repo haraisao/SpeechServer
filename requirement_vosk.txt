@@ -2,4 +2,6 @@ vosk
 pyyaml
 numpy
 sounddevice
+soundfile
+resampy
 Flask
